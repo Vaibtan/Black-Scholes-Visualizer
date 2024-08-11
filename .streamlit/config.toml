@@ -2,7 +2,7 @@
 primaryColor="#FF4B4B"
 backgroundColor="#202741"
 secondaryBackgroundColor="#262730"
-textColor="#FAFAFA"
+textColor="#f4dfdf"
 font="sans serif"
 [server]
 enableStaticServing = true
