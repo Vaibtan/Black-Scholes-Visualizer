@@ -9,10 +9,10 @@ import seaborn as sns
 
 # Page configuration
 st.set_page_config(
-    page_title="Black-Scholes Option Pricing Model",
-    page_icon="📊",
-    layout="wide",
-    initial_sidebar_state="expanded")
+    page_title = "Black-Scholes Option Pricing Model",
+    page_icon = "📊",
+    layout = "wide",
+    initial_sidebar_state = "expanded")
 
 
 # Custom CSS to inject into Streamlit
@@ -56,7 +56,7 @@ st.markdown("""
 }
 
 </style>
-""", unsafe_allow_html=True)
+""", unsafe_allow_html = True)
 
 # (Include the BlackScholes class definition here)
 
@@ -75,9 +75,7 @@ class BlackScholes:
         self.volatility = volatility
         self.interest_rate = interest_rate
 
-    def calculate_prices(
-        self,
-    ):
+    def calculate_prices(self):
         time_to_maturity = self.time_to_maturity
         strike = self.strike
         current_price = self.current_price
@@ -116,25 +114,24 @@ class BlackScholes:
         return call_price, put_price
 
 # Function to generate heatmaps
-# ... your existing imports and BlackScholes class definition ...
 
 
 # Sidebar for User Inputs
 with st.sidebar:
     st.title("📊 Black-Scholes Model")
 
-    current_price = st.number_input("Current Asset Price", value=100.0)
-    strike = st.number_input("Strike Price", value=100.0)
-    time_to_maturity = st.number_input("Time to Maturity (Years)", value=1.0)
-    volatility = st.number_input("Volatility (σ)", value=0.2)
-    interest_rate = st.number_input("Risk-Free Interest Rate", value=0.05)
+    current_price = st.number_input("Current Asset Price", value = 100.0)
+    strike = st.number_input("Strike Price", value = 100.0)
+    time_to_maturity = st.number_input("Time to Maturity (Years)", value = 1.0)
+    volatility = st.number_input("Volatility (σ)", value = 0.2)
+    interest_rate = st.number_input("Risk-Free Interest Rate", value = 0.05)
 
     st.markdown("---")
     calculate_btn = st.button('Heatmap Parameters')
-    spot_min = st.number_input('Min Spot Price', min_value = 0.01, value=current_price * 0.8, step = 0.01)
-    spot_max = st.number_input('Max Spot Price', min_value=0.01, value=current_price*1.2, step=0.01)
-    vol_min = st.slider('Min Volatility for Heatmap', min_value=0.01, max_value=1.0, value=volatility*0.5, step=0.01)
-    vol_max = st.slider('Max Volatility for Heatmap', min_value=0.01, max_value=1.0, value=volatility*1.5, step=0.01)
+    spot_min = st.number_input('Min Spot Price', min_value = 0.01, value = current_price * 0.8, step = 0.01)
+    spot_max = st.number_input('Max Spot Price', min_value = 0.01, value = current_price * 1.2, step = 0.01)
+    vol_min = st.slider('Min Volatility for Heatmap', min_value = 0.01, max_value = 1.0, value = volatility * 0.5, step = 0.01)
+    vol_max = st.slider('Max Volatility for Heatmap', min_value = 0.01, max_value = 1.0, value = volatility * 1.5, step = 0.01)
     
     spot_range = np.linspace(spot_min, spot_max, 10)
     vol_range = np.linspace(vol_min, vol_max, 10)
@@ -148,9 +145,9 @@ def plot_heatmap(bs_model, spot_range, vol_range, strike):
     for i, vol in enumerate(vol_range):
         for j, spot in enumerate(spot_range):
             bs_temp = BlackScholes(
-                time_to_maturity=bs_model.time_to_maturity,
-                strike=strike,
-                current_price=spot,
+                time_to_maturity = bs_model.time_to_maturity,
+                strike = strike,
+                current_price = spot,
                 volatility=vol,
                 interest_rate=bs_model.interest_rate
             )
@@ -159,15 +156,15 @@ def plot_heatmap(bs_model, spot_range, vol_range, strike):
             put_prices[i, j] = bs_temp.put_price
     
     # Plotting Call Price Heatmap
-    fig_call, ax_call = plt.subplots(figsize=(10, 8))
-    sns.heatmap(call_prices, xticklabels=np.round(spot_range, 2), yticklabels=np.round(vol_range, 2), annot=True, fmt=".2f", cmap="viridis", ax=ax_call)
+    fig_call, ax_call = plt.subplots(figsize = (10, 8))
+    sns.heatmap(call_prices, xticklabels = np.round(spot_range, 2), yticklabels = np.round(vol_range, 2), annot = True, fmt = ".2f", cmap = "viridis", ax = ax_call)
     ax_call.set_title('CALL')
     ax_call.set_xlabel('Spot Price')
     ax_call.set_ylabel('Volatility')
     
     # Plotting Put Price Heatmap
-    fig_put, ax_put = plt.subplots(figsize=(10, 8))
-    sns.heatmap(put_prices, xticklabels=np.round(spot_range, 2), yticklabels=np.round(vol_range, 2), annot=True, fmt=".2f", cmap="viridis", ax=ax_put)
+    fig_put, ax_put = plt.subplots(figsize = (10, 8))
+    sns.heatmap(put_prices, xticklabels = np.round(spot_range, 2), yticklabels = np.round(vol_range, 2), annot = True, fmt = ".2f", cmap = "viridis", ax = ax_put)
     ax_put.set_title('PUT')
     ax_put.set_xlabel('Spot Price')
     ax_put.set_ylabel('Volatility')
@@ -194,7 +191,7 @@ bs_model = BlackScholes(time_to_maturity, strike, current_price, volatility, int
 call_price, put_price = bs_model.calculate_prices()
 
 # Display Call and Put Values in colored tables
-col1, col2 = st.columns([1,1], gap="small")
+col1, col2 = st.columns([1,1], gap = "small")
 
 with col1:
     # Using the custom class for CALL value
@@ -216,7 +213,7 @@ with col2:
                 <div class="metric-value">${put_price:.2f}</div>
             </div>
         </div>
-    """, unsafe_allow_html=True)
+    """, unsafe_allow_html = True)
 
 st.markdown("")
 st.title("Options Price - Interactive Heatmap")
