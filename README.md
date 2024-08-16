@@ -1,6 +1,6 @@
-# 📦 Streamlit App Starter Kit 
+# Black Scholes Pricing Model Visaulizer
 ```
-⬆️ (Replace above with your app's name)
+⬆️ (https://black-scholes-visualizer.streamlit.app/)
 ```
 
 Description of the app ...
