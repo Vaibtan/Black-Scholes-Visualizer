@@ -1,6 +1,6 @@
 # Black Scholes Pricing Model Visaulizer
 ```
-⬆️ (https://black-scholes-visualizer.streamlit.app/)
+⬆️ https://black-scholes-visualizer.streamlit.app/
 ```
 
 Description of the app ...
