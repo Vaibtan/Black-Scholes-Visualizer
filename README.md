@@ -1,4 +1,4 @@
-# Black Scholes Pricing Model Visaulizer
+# Black Scholes Pricing Model Visualizer
 ```
 ⬆️ https://black-scholes-visualizer.streamlit.app/
 ```
